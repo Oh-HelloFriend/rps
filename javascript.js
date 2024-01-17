@@ -1,27 +1,46 @@
 // Computer Choice
-function getComputerChoice(){
-    
+function getComputerChoice(){    
     let rng = Math.random();
 
-    let computerChoice;
-    
     if (rng <= (1/3)) {
-        computerChoice = "rock"
+        return "rock"
     } else if (rng <= (2/3)) {
-        computerChoice = "paper"
+        return "paper"
     } else{
-        computerChoice ="scissors"
+        return "scissors"
     }
-    
-    return computerChoice;
 }
+let computerChoice = getComputerChoice();
 //
-
 // Get Player Choice and put it in lower case
 function getPlayerChoice(){
-    let playerChoice = prompt("Rock, paper or scissors ?").toLowerCase();
+    return prompt("rock, paper or scissors ?").toLowerCase();
 }
-//
-// Make sure Player plays RPS, loop to player choice
 
+let playerChoice = getPlayerChoice();
+//
+// Play one round
+function playRound(playerChoice, computerChoice){
+
+    if (((playerChoice === "rock") && (computerChoice === "scissors")) || 
+    ((playerChoice === "scissors") && (computerChoice === "paper")) || 
+    ((playerChoice === "paper") && (computerChoice === "rock"))){
+    return `You Win ! ${playerChoice} beats ${computerChoice} !`;
+        
+    } else if (((playerChoice === "rock") && (computerChoice === "paper")) || 
+    ((playerChoice === "scissors") && (computerChoice === "rock")) || 
+    ((playerChoice === "paper") && (computerChoice === "scissors"))){
+    return `You Lose ! ${playerChoice} is beaten by ${computerChoice} !`;
+        
+    } else{
+        console.log(playRound(playerChoice, computerChoice))
+    }
+}
+
+//
+console.log(playRound(playerChoice,computerChoice))
+//Play Five rounds
+function bo5(){
+
+}
 //
