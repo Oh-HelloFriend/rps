@@ -1,46 +1,71 @@
 // Computer Choice
+let computerChoice;
+
 function getComputerChoice(){    
     let rng = Math.random();
-
+    
     if (rng <= (1/3)) {
-        return "rock"
+        computerChoice = "rock";
     } else if (rng <= (2/3)) {
-        return "paper"
+        computerChoice = "paper";
     } else{
-        return "scissors"
+        computerChoice = "scissors";
     }
 }
-let computerChoice = getComputerChoice();
 //
 // Get Player Choice and put it in lower case
+let playerChoice;
+
 function getPlayerChoice(){
-    return prompt("rock, paper or scissors ?").toLowerCase();
+    playerChoice = prompt("rock, paper or scissors ?").toLowerCase();
 }
 
-let playerChoice = getPlayerChoice();
+//
+//Win/lose count
+let win = 0
+let lose = 0
+let gameCount = 0
 //
 // Play one round
-function playRound(playerChoice, computerChoice){
+function playRound(){
+    getComputerChoice();
+    getPlayerChoice();
 
     if (((playerChoice === "rock") && (computerChoice === "scissors")) || 
     ((playerChoice === "scissors") && (computerChoice === "paper")) || 
     ((playerChoice === "paper") && (computerChoice === "rock"))){
-    return `You Win ! ${playerChoice} beats ${computerChoice} !`;
+        win++;
+        gameCount++;
+        console.log(`You Win ! ${playerChoice} beats ${computerChoice} !`);
+        console.log(`Best of 5 games !\n\nGame number = ${gameCount}\n\nWin count = ${win}\nLose count = ${lose}`);
+        return;
         
     } else if (((playerChoice === "rock") && (computerChoice === "paper")) || 
     ((playerChoice === "scissors") && (computerChoice === "rock")) || 
     ((playerChoice === "paper") && (computerChoice === "scissors"))){
-    return `You Lose ! ${playerChoice} is beaten by ${computerChoice} !`;
+        lose++;
+        gameCount++;
+        console.log(`You Lose ! ${playerChoice} is beaten by ${computerChoice} !`);
+        console.log(`Best of 5 games !\n\nGame number = ${gameCount}\n\nWin count = ${win}\nLose count = ${lose}`)
+        return;
         
     } else{
-        console.log(playRound(playerChoice, computerChoice))
+        console.log("It's a tie ! Let's play this one again.");
+        console.log(`Best of 5 games !\n\nGame number = ${gameCount}\n\nWin count = ${win}\nLose count = ${lose}`);
+        playRound();
+        return;
     }
 }
-
 //
-console.log(playRound(playerChoice,computerChoice))
-//Play Five rounds
-function bo5(){
-
+//BO5
+function playGame(){
+    alert("Welcome ! Rock Paper Scissors, best of five games ! Let's do this !");
+    while(gameCount<5){
+        playRound();
+    }
+    if(win>lose){
+        alert("Well played ! You win !");
+    }else alert("You lost.");
 }
+playGame();
 //
